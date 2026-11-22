@@ -69,7 +69,7 @@ plt.close()
 # GRAPH 2: CONFUSION MATRICES
 # --------------------------------------------------
 
-test_data = pd.read_csv("data/test_data.csv")
+test_data = pd.read_csv("test_data.csv")
 
 X_test = test_data.drop(columns=["income"])
 y_test = test_data["income"]

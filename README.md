@@ -2,22 +2,37 @@
 
 ## 1. Problem Statement
 
-The objective of this project is to implement and compare five machine-learning classification algorithms to predict whether an individual's annual income exceeds $50,000 based on demographic, educational and employment-related attributes.
+The objective of this project is to implement, evaluate and compare five machine-learning classification algorithms to predict whether an individual's annual income exceeds $50,000 based on demographic, educational and employment-related attributes.
 
 This is a binary classification problem with two target classes:
 
 - `<=50K`: Annual income at or below $50,000.
 - `>50K`: Annual income above $50,000.
 
-The project evaluates five classification algorithms using six performance metrics and identifies the best-performing model.
+The project implements five classification algorithms using the same dataset and evaluates their performance using six standard classification metrics.
+
+The objective is to identify the model that provides the best overall classification performance.
 
 ## 2. Dataset Description
 
-**Dataset:** Adult Census Income Dataset  
-**Source:** UCI Machine Learning Repository  
+**Dataset:** Adult Census Income Dataset
+
+**Source:** UCI Machine Learning Repository
+
 **Dataset URL:** https://archive.ics.uci.edu/dataset/2/adult
 
-### Dataset characteristics
+### 2.1 Reason for Dataset Selection
+
+The Adult Census Income Dataset was selected because it contains demographic, educational and employment-related attributes that can be used to study income classification.
+
+It provides:
+- More than 48,000 records.
+- A combination of numerical and categorical features.
+- Missing values that require preprocessing.
+- An imbalanced target variable.
+- Sufficient features and observations for comparing multiple classification algorithms.
+
+### 2.2 Dataset Characteristics
 
 | Attribute | Description |
 |---|---|
@@ -29,9 +44,9 @@ The project evaluates five classification algorithms using six performance metri
 | Categorical features | 8 |
 | Original columns | 15 |
 
-### Features
+### 2.3 Input Features
 
-The dataset contains the following input features:
+The dataset contains the following 14 input features:
 
 1. age
 2. workclass
@@ -48,31 +63,36 @@ The dataset contains the following input features:
 13. hours-per-week
 14. native-country
 
-The target variable is `income`.
+**Target variable:** `income`
 
-### Class distribution after data cleaning
+### 2.4 Class Distribution After Data Cleaning
 
 | Income Class | Records | Percentage |
 |---|---:|---:|
 | <=50K | 37,109 | 76.06% |
 | >50K | 11,681 | 23.94% |
-| Total | 48,790 | 100% |
+| **Total** | **48,790** | **100%** |
 
-The dataset exhibits class imbalance, with the <=50K category representing approximately 76% of the observations.
+The dataset exhibits class imbalance, with approximately 76% of observations belonging to the <=50K category.
+
+This imbalance was considered during model evaluation.
 
 ## 3. GitHub Repository Link
 
-**Repository URL:** https://github.com/AbhisekGhosh2026CT05025/ML-Assignment-2
+**Repository URL:**
+
+https://github.com/AbhisekGhosh2026CT05025/ML-Assignment-2
 
 The repository contains:
 
-- Complete Python source code
-- requirements.txt
-- README.md
-- Test dataset (CSV)
-- Trained model files
-- Model evaluation results
-- Performance visualization graphs
+- Complete Python source code.
+- requirements.txt.
+- README.md.
+- Test dataset (CSV).
+- Five trained classification models.
+- Preprocessing pipeline.
+- Model evaluation results.
+- Performance visualization graphs.
 
 ## 4. Data Preprocessing
 
@@ -80,7 +100,7 @@ The following preprocessing operations were performed.
 
 ### 4.1 Missing Value Handling
 
-Missing values were identified in:
+Missing values were identified in the following attributes:
 
 - workclass
 - occupation
@@ -88,9 +108,8 @@ Missing values were identified in:
 
 Both actual null values and '?' markers were identified and converted into missing values.
 
-Numerical missing values were handled using median imputation.
-
-Categorical missing values were handled using most-frequent-value imputation.
+- Numerical missing values were handled using median imputation.
+- Categorical missing values were handled using most-frequent-value imputation.
 
 ### 4.2 Duplicate Removal
 
@@ -102,7 +121,9 @@ Final cleaned dataset: 48,790 records.
 
 One-Hot Encoding was applied to categorical features to convert categorical values into numerical representations.
 
-The encoder was configured with handle_unknown='ignore'.
+The encoder was configured with:
+
+`handle_unknown='ignore'`
 
 ### 4.4 Feature Scaling
 
@@ -110,20 +131,27 @@ StandardScaler was applied to numerical features to normalize their scales.
 
 ### 4.5 Train-Test Split
 
-The dataset was divided into:
+The dataset was divided using an 80:20 train-test split.
 
-- Training: 80% (39,032 records)
-- Testing: 20% (9,758 records)
+| Dataset | Records | Percentage |
+|---|---:|---:|
+| Training | 39,032 | 80% |
+| Testing | 9,758 | 20% |
+| **Total** | **48,790** | **100%** |
 
 Stratified sampling was used to preserve the target class distribution.
 
-Random seed: 42.
+Random seed: `42`
 
 ### 4.6 Prevention of Data Leakage
 
 A Scikit-learn Pipeline and ColumnTransformer were used.
 
-Preprocessing parameters were fitted exclusively on the training dataset. The same fitted transformations were subsequently applied to the testing dataset.
+Preprocessing parameters were fitted exclusively on the training dataset.
+
+The same fitted transformations were subsequently applied to the testing dataset.
+
+This ensures that information from the test dataset does not influence preprocessing during model training.
 
 ### 4.7 Final Feature Representation
 
@@ -143,41 +171,59 @@ Five classification algorithms were implemented using the same dataset and train
 ### 5.1 Logistic Regression
 
 Configuration:
-- max_iter = 1000
-- random_state = 42
+
+- `max_iter = 1000`
+- `random_state = 42`
+
+Logistic Regression was used as a baseline classification algorithm to evaluate the relationship between input features and the probability of belonging to the high-income category.
 
 ### 5.2 Decision Tree Classifier
 
 Configuration:
-- random_state = 42
 
-### 5.3 K-Nearest Neighbors
+- `random_state = 42`
+
+Decision Tree is a tree-based classification algorithm that uses feature-based decision rules to classify observations.
+
+### 5.3 K-Nearest Neighbors (KNN)
 
 Configuration:
-- n_neighbors = 5
-- weights = uniform
+
+- `n_neighbors = 5`
+- `weights = uniform`
+
+KNN classifies observations based on the majority class among their five nearest neighbors.
+
+Feature scaling is important because KNN relies on distance calculations.
 
 ### 5.4 Gaussian Naive Bayes
 
-Gaussian Naive Bayes was implemented using the GaussianNB classifier.
+Gaussian Naive Bayes was implemented using the `GaussianNB` classifier.
+
+It applies Bayes' theorem with the assumption that numerical features follow Gaussian distributions within each class.
 
 ### 5.5 Random Forest Classifier
 
 Configuration:
-- n_estimators = 200
-- random_state = 42
-- n_jobs = -1
+
+- `n_estimators = 200`
+- `random_state = 42`
+- `n_jobs = -1`
+
+Random Forest is an ensemble learning algorithm that combines multiple decision trees to improve classification performance.
 
 ## 6. Model Evaluation and Comparison
 
-All five models were evaluated using the following metrics:
+All five models were evaluated using the same test dataset.
 
-- Accuracy
-- AUC Score
-- Precision
-- Recall
-- F1 Score
-- Matthews Correlation Coefficient (MCC)
+The following six evaluation metrics were calculated:
+
+1. Accuracy
+2. AUC Score
+3. Precision
+4. Recall
+5. F1 Score
+6. Matthews Correlation Coefficient (MCC)
 
 The positive classification category was defined as income >50K.
 
@@ -193,33 +239,45 @@ The positive classification category was defined as income >50K.
 
 ### 6.2 Graphical Representation
 
-#### Model Performance Comparison
+The performance of all five classification algorithms is presented using the following visualizations.
+
+#### A. Classification Model Performance Comparison
+
+This visualization compares Accuracy, AUC, Precision, Recall, F1 Score and MCC across all five models.
 
 ![Classification Model Performance Comparison](outputs/graphs/model_metrics_comparison.png)
 
-#### Confusion Matrix Comparison
+#### B. Confusion Matrix Comparison
+
+The confusion matrices illustrate the correct and incorrect predictions made by each classification algorithm.
 
 ![Confusion Matrix Comparison](outputs/graphs/confusion_matrices.png)
 
-#### ROC Curve Comparison
+#### C. ROC Curve Comparison
+
+The ROC curves compare the ability of each model to distinguish between the two income categories at different classification thresholds.
 
 ![ROC Curve Comparison](outputs/graphs/roc_comparison.png)
 
 ## 7. Observations on Model Performance
 
-### Logistic Regression
+### 7.1 Logistic Regression
 
 Logistic Regression achieved 85.20% accuracy and the highest AUC score of 0.9081.
 
-It demonstrated strong discrimination and the highest precision of 0.7304. However, its recall of 0.6053 indicates that some high-income individuals were incorrectly classified as low-income.
+It demonstrated strong discrimination and the highest precision of 0.7304.
 
-### Decision Tree
+However, its recall of 0.6053 indicates that some high-income individuals were incorrectly classified as low-income.
+
+### 7.2 Decision Tree
 
 Decision Tree achieved 82.14% accuracy and an AUC score of 0.7587.
 
 It captured nonlinear relationships but demonstrated comparatively weaker discrimination than the other models.
 
-### K-Nearest Neighbors
+Its performance was lower than Random Forest across the major overall evaluation metrics.
+
+### 7.3 K-Nearest Neighbors
 
 KNN achieved 83.89% accuracy and an AUC score of 0.8667.
 
@@ -227,7 +285,7 @@ It demonstrated reasonable classification performance, with moderate precision a
 
 Feature scaling was important because KNN relies on distance calculations.
 
-### Naive Bayes
+### 7.4 Naive Bayes
 
 Naive Bayes achieved the highest recall of 0.9336 but relatively low precision of 0.3672.
 
@@ -235,7 +293,7 @@ It correctly identified a large proportion of high-income individuals but genera
 
 This indicates that the model prioritizes identifying positive cases at the expense of precision.
 
-### Random Forest
+### 7.5 Random Forest
 
 Random Forest achieved the highest accuracy of 85.46%, F1 score of 0.6767 and MCC of 0.5854.
 
@@ -243,37 +301,39 @@ The ensemble approach combines multiple decision trees and provides the stronges
 
 ## 8. Overall Winner
 
-**Random Forest Classifier**
+**Selected Model: Random Forest Classifier**
 
 Random Forest was selected as the overall winner based on the combined evaluation metrics.
 
-It achieved:
+Its performance was:
 
-- Accuracy: 85.46%
-- AUC: 0.9072
-- Precision: 0.7233
-- Recall: 0.6357
-- F1 Score: 0.6767
-- MCC: 0.5854
+| Evaluation Metric | Score |
+|---|---:|
+| Accuracy | 85.46% |
+| AUC | 0.9072 |
+| Precision | 0.7233 |
+| Recall | 0.6357 |
+| F1 Score | 0.6767 |
+| MCC | 0.5854 |
 
-Logistic Regression achieved a marginally higher AUC and precision. However, Random Forest achieved the highest accuracy, F1 score and MCC.
+Logistic Regression achieved a marginally higher AUC and precision.
+
+However, Random Forest achieved the highest accuracy, F1 score and MCC.
 
 Therefore, Random Forest demonstrated the best overall performance for this dataset under the selected evaluation criteria.
 
 ## 9. Project Execution Instructions
 
-### Prerequisites
+### 9.1 Prerequisites
 
 - Python 3.x
 - pip
-- Required Python libraries
+- Required Python libraries listed in requirements.txt
 
-### Installation
-
-Clone the repository:
+### 9.2 Clone the Repository
 
 ```bash
-git clone https://github.com/AbhisekGhosh2026CT05025/ML-Assignment-2
+git clone https://github.com/AbhisekGhosh2026CT05025/ML-Assignment-2.git
 ```
 
 Navigate to the project directory:
@@ -282,37 +342,47 @@ Navigate to the project directory:
 cd ML-Assignment-2
 ```
 
-Install dependencies:
+### 9.3 Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### Execution sequence
+### 9.4 Execute the Project
 
-Run the following scripts in order:
+Run the following scripts in the specified order:
 
 ```bash
 python 01_download_dataset.py
+```
 
+```bash
 python 02_explore_dataset.py
+```
 
+```bash
 python 03_preprocess_split.py
+```
 
+```bash
 python 04_train_models.py
+```
 
+```bash
 python 05_visualize_results.py
 ```
 
-### Generated outputs
+### 9.5 Generated Outputs
 
-- Cleaned training and testing datasets
-- Preprocessing pipeline
-- Five trained classification models
-- Model comparison CSV
-- Performance comparison graphs
-- Confusion matrices
-- ROC curve comparison
+The execution pipeline generates:
+
+- Cleaned training and testing datasets.
+- Preprocessing pipeline.
+- Five trained classification models.
+- Model comparison CSV.
+- Performance comparison graphs.
+- Confusion matrices.
+- ROC curve comparison.
 
 ## 10. Repository Structure
 
@@ -320,12 +390,7 @@ python 05_visualize_results.py
 ML-Assignment-2/
 │
 ├── data/
-│   ├── train_data.csv
-│   ├── test_data.csv
-│   ├── X_train_processed.npy
-│   ├── X_test_processed.npy
-│   ├── y_train.npy
-│   └── y_test.npy
+│   └── test_data.csv
 │
 ├── models/
 │   ├── preprocessor.pkl
@@ -351,14 +416,22 @@ ML-Assignment-2/
 └── README.md
 ```
 
+Note: The test dataset is stored under `data/` in the current project structure. A copy should also be placed in the repository root as `test_data.csv` to match the assignment's suggested submission structure.
+
+Intermediate training files and processed NumPy arrays are generated during execution and are not required to be committed unless specifically requested.
+
 ## 11. Conclusion
 
-This project implemented five machine-learning classification algorithms to predict income categories using the Adult Census Income dataset.
+This project implemented five machine-learning classification algorithms to predict income categories using the Adult Census Income Dataset.
 
 Data cleaning, missing-value imputation, duplicate removal, categorical encoding, feature scaling and stratified train-test splitting were performed.
 
-The models were evaluated using six classification metrics.
+The models were evaluated using six classification metrics: Accuracy, AUC, Precision, Recall, F1 Score and MCC.
 
 Random Forest achieved the best overall balance, with 85.46% accuracy, a 0.6767 F1 score and 0.5854 MCC.
 
+Logistic Regression achieved the highest AUC of 0.9081, while Naive Bayes achieved the highest recall of 0.9336.
+
 The experiment demonstrates that different classification algorithms exhibit different strengths depending on the evaluation metric and the characteristics of the dataset.
+
+Overall, Random Forest was selected as the best-performing model based on its combined classification performance.

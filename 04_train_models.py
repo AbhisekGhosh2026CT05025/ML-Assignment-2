@@ -27,7 +27,7 @@ from sklearn.metrics import (
 # --------------------------------------------------
 
 train_data = pd.read_csv("data/train_data.csv")
-test_data = pd.read_csv("data/test_data.csv")
+test_data = pd.read_csv("test_data.csv")
 
 X_train = train_data.drop(columns=["income"])
 y_train = train_data["income"]
