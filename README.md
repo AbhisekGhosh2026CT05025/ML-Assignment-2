@@ -387,36 +387,52 @@ The execution pipeline generates:
 ## 10. Repository Structure
 
 ```text
+## Repository Structure
+
+```text
 ML-Assignment-2/
 │
+├── .venv/                              # Python virtual environment (not committed)
+│
 ├── data/
-│   └── test_data.csv
+│   ├── train_data.csv                  # Training dataset
+│   ├── X_train_processed.npy           # Processed training features
+│   ├── X_test_processed.npy            # Processed testing features
+│   ├── y_train.npy                     # Training target labels
+│   └── y_test.npy                      # Testing target labels
 │
 ├── models/
-│   ├── preprocessor.pkl
-│   ├── logistic_regression.pkl
-│   ├── decision_tree.pkl
-│   ├── knn.pkl
-│   ├── naive_bayes.pkl
-│   └── random_forest.pkl
+│   ├── decision_tree.pkl               # Trained Decision Tree model
+│   ├── knn.pkl                          # Trained KNN model
+│   ├── logistic_regression.pkl          # Trained Logistic Regression model
+│   ├── naive_bayes.pkl                  # Trained Naive Bayes model
+│   ├── random_forest.pkl                # Trained Random Forest model
+│   └── preprocessor.pkl                 # Fitted preprocessing pipeline
 │
 ├── outputs/
-│   ├── model_comparison.csv
-│   └── graphs/
-│       ├── model_metrics_comparison.png
-│       ├── confusion_matrices.png
-│       └── roc_comparison.png
+│   ├── graphs/
+│   │   ├── confusion_matrices.png       # Confusion matrix comparison
+│   │   ├── model_metrics_comparison.png # Classification metrics comparison
+│   │   └── roc_comparison.png           # ROC curve comparison
+│   │
+│   ├── model_comparison.csv             # Model evaluation results
+│   └── processed_feature_names.csv      # Names of processed features
 │
-├── 01_download_dataset.py
-├── 02_explore_dataset.py
-├── 03_preprocess_split.py
-├── 04_train_models.py
-├── 05_visualize_results.py
-├── requirements.txt
-└── README.md
+├── 01_download_dataset.py               # Dataset download script
+├── 02_explore_dataset.py                # Dataset exploration and analysis
+├── 03_preprocess_split.py               # Data preprocessing and train-test splitting
+├── 04_train_models.py                   # Model training and evaluation
+├── 05_visualize_results.py              # Results visualization
+│
+├── adult_income.csv                     # Original Adult Census Income dataset
+├── test_data.csv                        # Test dataset
+├── requirements.txt                     # Python dependencies
+├── README.md                            # Project documentation
+└── .gitignore                           # Git ignored files configuration
 ```
 
-Note: The test dataset is stored under `data/` in the current project structure. A copy should also be placed in the repository root as `test_data.csv` to match the assignment's suggested submission structure.
+**Note:** The `.venv/` directory is maintained locally and excluded from version control using `.gitignore`.
+```
 
 Intermediate training files and processed NumPy arrays are generated during execution and are not required to be committed unless specifically requested.
 

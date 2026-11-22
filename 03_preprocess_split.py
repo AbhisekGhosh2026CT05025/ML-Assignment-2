@@ -198,7 +198,7 @@ train_data.to_csv(
 )
 
 test_data.to_csv(
-    "data/test_data.csv",
+    "test_data.csv",
     index=False
 )
 
