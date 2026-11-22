@@ -182,8 +182,8 @@ X_test_processed = preprocessor.transform(X_test)
 # --------------------------------------------------
 
 os.makedirs("data", exist_ok=True)
-os.makedirs("models", exist_ok=True)
-os.makedirs("outputs", exist_ok=True)
+os.makedirs("model", exist_ok=True)
+os.makedirs("output", exist_ok=True)
 
 # Save cleaned training and testing datasets
 train_data = X_train.copy()
@@ -205,7 +205,7 @@ test_data.to_csv(
 # Save fitted preprocessing pipeline
 joblib.dump(
     preprocessor,
-    "models/preprocessor.pkl"
+    "model/preprocessor.pkl"
 )
 
 # Save transformed datasets
@@ -233,7 +233,7 @@ np.save(
 feature_names = preprocessor.get_feature_names_out()
 
 pd.Series(feature_names).to_csv(
-    "outputs/processed_feature_names.csv",
+    "output/processed_feature_names.csv",
     index=False
 )
 

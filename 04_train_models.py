@@ -36,7 +36,7 @@ X_test = test_data.drop(columns=["income"])
 y_test = test_data["income"]
 
 # Load preprocessing pipeline
-preprocessor = joblib.load("models/preprocessor.pkl")
+preprocessor = joblib.load("model/preprocessor.pkl")
 
 
 # --------------------------------------------------
@@ -74,8 +74,8 @@ models = {
 
 results = []
 
-os.makedirs("models", exist_ok=True)
-os.makedirs("outputs", exist_ok=True)
+os.makedirs("model", exist_ok=True)
+os.makedirs("output", exist_ok=True)
 
 for model_name, classifier in models.items():
 
@@ -170,7 +170,7 @@ for model_name, classifier in models.items():
         + ".pkl"
     )
 
-    model_path = os.path.join("models", filename)
+    model_path = os.path.join("model", filename)
 
     # Save complete pipeline including preprocessing.
     # Compression reduces disk storage requirements.
@@ -203,7 +203,7 @@ for model_name, classifier in models.items():
 results_df = pd.DataFrame(results)
 
 results_df.to_csv(
-    "outputs/model_comparison.csv",
+    "output/model_comparison.csv",
     index=False
 )
 

@@ -12,13 +12,13 @@ from sklearn.metrics import (
 )
 
 # Create output directory
-os.makedirs("outputs/graphs", exist_ok=True)
+os.makedirs("output/graphs", exist_ok=True)
 
 # --------------------------------------------------
 # GRAPH 1: ALL SIX METRICS
 # --------------------------------------------------
 
-results = pd.read_csv("outputs/model_comparison.csv")
+results = pd.read_csv("output/model_comparison.csv")
 
 metrics = [
     "Accuracy",
@@ -58,7 +58,7 @@ fig.suptitle(
 plt.tight_layout()
 
 plt.savefig(
-    "outputs/graphs/model_metrics_comparison.png",
+    "output/graphs/model_metrics_comparison.png",
     dpi=300,
     bbox_inches="tight"
 )
@@ -90,7 +90,7 @@ for ax, (name, filename) in zip(
 ):
 
     model = joblib.load(
-        os.path.join("models", filename)
+        os.path.join("model", filename)
     )
 
     predictions = model.predict(X_test)
@@ -125,7 +125,7 @@ fig.suptitle(
 plt.tight_layout()
 
 plt.savefig(
-    "outputs/graphs/confusion_matrices.png",
+    "output/graphs/confusion_matrices.png",
     dpi=300,
     bbox_inches="tight"
 )
@@ -143,7 +143,7 @@ y_binary = (y_test == ">50K").astype(int)
 for name, filename in model_files.items():
 
     model = joblib.load(
-        os.path.join("models", filename)
+        os.path.join("model", filename)
     )
 
     probabilities = model.predict_proba(X_test)
@@ -184,7 +184,7 @@ plt.legend(loc="lower right")
 plt.grid(alpha=0.3)
 
 plt.savefig(
-    "outputs/graphs/roc_comparison.png",
+    "output/graphs/roc_comparison.png",
     dpi=300,
     bbox_inches="tight"
 )
@@ -195,6 +195,6 @@ print("\nAll visualizations generated successfully!")
 
 print("\nGenerated files:")
 
-print("1. outputs/graphs/model_metrics_comparison.png")
-print("2. outputs/graphs/confusion_matrices.png")
-print("3. outputs/graphs/roc_comparison.png")
+print("1. output/graphs/model_metrics_comparison.png")
+print("2. output/graphs/confusion_matrices.png")
+print("3. output/graphs/roc_comparison.png")
