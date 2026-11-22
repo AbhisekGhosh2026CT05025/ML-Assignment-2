@@ -245,19 +245,19 @@ The performance of all five classification algorithms is presented using the fol
 
 This visualization compares Accuracy, AUC, Precision, Recall, F1 Score and MCC across all five models.
 
-![Classification Model Performance Comparison](outputs/graphs/model_metrics_comparison.png)
+![Classification Model Performance Comparison](output/graphs/model_metrics_comparison.png)
 
 #### B. Confusion Matrix Comparison
 
 The confusion matrices illustrate the correct and incorrect predictions made by each classification algorithm.
 
-![Confusion Matrix Comparison](outputs/graphs/confusion_matrices.png)
+![Confusion Matrix Comparison](output/graphs/confusion_matrices.png)
 
 #### C. ROC Curve Comparison
 
 The ROC curves compare the ability of each model to distinguish between the two income categories at different classification thresholds.
 
-![ROC Curve Comparison](outputs/graphs/roc_comparison.png)
+![ROC Curve Comparison](output/graphs/roc_comparison.png)
 
 ## 7. Observations on Model Performance
 
